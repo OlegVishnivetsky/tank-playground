@@ -11,8 +11,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Tank
+  - Projectile
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
     locked: 0
   - name: Tank
     uniqueID: 504521655
+    locked: 0
+  - name: UI
+    uniqueID: 2507759459
     locked: 0
