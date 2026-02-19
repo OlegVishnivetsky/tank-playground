@@ -1,4 +1,5 @@
-﻿using TankPlayground.Services;
+﻿using TankPlayground.Config;
+using TankPlayground.Services;
 using Unity.Netcode;
 using UnityEngine;
 using Zenject;
@@ -10,12 +11,7 @@ namespace TankPlayground.Gameplay
         [SerializeField] private Animator _shootingFlashAnimator;
         [SerializeField] private Collider2D _ownerCollider;
         [SerializeField] private Transform _projectileSpawnPoint;
-        [SerializeField] private GameObject _clientProjectilePrefab;
-        [SerializeField] private GameObject _serverProjectilePrefab;
-        
-        [Header("Settings")]
-        [SerializeField] private float _projectileSpeed = 5f;
-        [SerializeField] private float _fireRate = 1f;
+        [SerializeField] private TankConfig _tankConfig;
         
         private bool _shouldLaunch;
         private float _timeSinceLastFire = float.MaxValue;
@@ -52,12 +48,13 @@ namespace TankPlayground.Gameplay
             if (!IsOwner || !_shouldLaunch)
                 return;
 
-            if (_timeSinceLastFire < 1f / _fireRate) 
+            if (_timeSinceLastFire < 1f / _tankConfig.FireRate) 
                 return;
 
             _timeSinceLastFire = 0f;
             PrimaryFireServerRpc(_projectileSpawnPoint.position, _projectileSpawnPoint.up);
-            LaunchProjectile(_clientProjectilePrefab, _projectileSpawnPoint.position, _projectileSpawnPoint.up);
+            LaunchProjectile(_tankConfig.ClientProjectilePrefab, 
+                _projectileSpawnPoint.position, _projectileSpawnPoint.up, 0);
         }
 
         private void OnPrimaryFirePressed(bool isPressed)
@@ -71,7 +68,7 @@ namespace TankPlayground.Gameplay
         [ServerRpc]
         private void PrimaryFireServerRpc(Vector2 position, Vector2 direction)
         {
-            if (Time.time - _serverLastFireTime < 1f / _fireRate - ServerFireRateTimerTolerance) 
+            if (Time.time - _serverLastFireTime < 1f / _tankConfig.FireRate - ServerFireRateTimerTolerance) 
                 return;
 
             _timeSinceLastFire = 0f;
@@ -83,7 +80,7 @@ namespace TankPlayground.Gameplay
             
             direction = direction.normalized;
             
-            LaunchProjectile(_serverProjectilePrefab, position, direction, false);
+            LaunchProjectile(_tankConfig.ServerProjectilePrefab, position, direction, _tankConfig.Damage, false);
             SpawnDummyProjectileClientRpc(position, direction);
         }
 
@@ -93,26 +90,20 @@ namespace TankPlayground.Gameplay
             if (IsOwner)
                 return;
             
-            LaunchProjectile(_clientProjectilePrefab, position, direction);
+            LaunchProjectile(_tankConfig.ClientProjectilePrefab, position, direction, 0);
         }
         
         private void LaunchProjectile(
-            GameObject projectilePrefab,
+            ProjectileBase projectilePrefab,
             Vector2 position,
             Vector2 direction,
+            int damage,
             bool showFlash = true)
         {
-            GameObject projectile = Instantiate(projectilePrefab,
+            ProjectileBase projectile = Instantiate(projectilePrefab,
                 position, Quaternion.identity);
-            projectile.transform.up = direction;
-            
-            Physics2D.IgnoreCollision(_ownerCollider, projectile.GetComponent<Collider2D>());
-
-            if (projectile.TryGetComponent(out Rigidbody2D rb))
-            {
-                Debug.Log($"Move projectile: {rb.transform.up * _projectileSpeed}");
-                rb.velocity = rb.transform.up * _projectileSpeed;
-            }
+            projectile.Initialize(damage, _tankConfig.ProjectileSpeed, OwnerClientId);
+            projectile.Shoot(_ownerCollider, direction);
 
             if (!showFlash)
                 return;

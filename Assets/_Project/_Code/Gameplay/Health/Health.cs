@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TankPlayground.Gameplay
 {
-    public class Health : NetworkBehaviour
+    public class Health : NetworkBehaviour, IDamageable
     {
         [SerializeField] private int _maxHealth = 100;
         

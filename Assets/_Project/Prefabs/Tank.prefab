@@ -328,10 +328,7 @@ MonoBehaviour:
   _shootingFlashAnimator: {fileID: 8112935370272755466}
   _ownerCollider: {fileID: 7590689443657715389}
   _projectileSpawnPoint: {fileID: 8991189657282232404}
-  _clientProjectilePrefab: {fileID: 4244246743451637142, guid: db1d4739d5b025a45a98a580fd349af6, type: 3}
-  _serverProjectilePrefab: {fileID: 6518985675912809144, guid: 67effbc229108fe479cf624231fa7374, type: 3}
-  _projectileSpeed: 30
-  _fireRate: 1
+  _tankConfig: {fileID: 11400000, guid: 197f90911b897bd4e9f95e824c515ee8, type: 2}
 --- !u!114 &4069587702021359196
 MonoBehaviour:
   m_ObjectHideFlags: 0
