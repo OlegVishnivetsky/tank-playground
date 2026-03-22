@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cabf92efa0b4ebeb4f6ddfd7e2dc4fc, type: 3}
+  m_Name: UIScreen Config
+  m_EditorClassIdentifier: 
+  _screens:
+  - ScreenType: 1
+    Reference:
+      m_AssetGUID: 9c80f65225e43314e8429987b4cec74d
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - ScreenType: 2
+    Reference:
+      m_AssetGUID: cfa474b0ceee3704f90b3acc0ad60962
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - ScreenType: 3
+    Reference:
+      m_AssetGUID: 84f0580f1645a794da3554967cde0635
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - ScreenType: 4
+    Reference:
+      m_AssetGUID: 5b68cf7280a1d504c8d90f5dc7856737
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1
+  - ScreenType: 5
+    Reference:
+      m_AssetGUID: 4dcbaecb53b211b4297092cc63fa8978
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 1

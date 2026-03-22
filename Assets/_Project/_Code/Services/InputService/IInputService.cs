@@ -1,4 +1,5 @@
 ﻿using System;
+using R3;
 using UnityEngine;
 
 namespace TankPlayground.Services
@@ -7,6 +8,7 @@ namespace TankPlayground.Services
     {
         Vector2 PointerPosition { get; }
 
+        Observable<ActionButtonType> ActionPressedObservable { get; }
         event Action<bool> PrimaryFirePressed;
         event Action<Vector2> MovePressed;
         

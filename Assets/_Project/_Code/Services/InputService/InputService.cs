@@ -1,4 +1,5 @@
 using System;
+using R3;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -10,6 +11,9 @@ namespace TankPlayground.Services
         private Controls _controls;
 
         public Vector2 PointerPosition { get; private set; }
+        
+        private readonly Subject<ActionButtonType> _actionPressedSubject = new();
+        public Observable<ActionButtonType> ActionPressedObservable => _actionPressedSubject;
         
         public event Action<bool> PrimaryFirePressed;
         public event Action<Vector2> MovePressed;
@@ -35,6 +39,8 @@ namespace TankPlayground.Services
             else if (context.canceled)
                 PrimaryFirePressed?.Invoke(false);
         }
+
+        public void OnReload(InputAction.CallbackContext context) => _actionPressedSubject.OnNext(ActionButtonType.Reload);
 
         public void OnAim(InputAction.CallbackContext context) => 
             PointerPosition = context.ReadValue<Vector2>();

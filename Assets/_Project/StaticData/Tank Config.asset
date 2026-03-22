@@ -12,8 +12,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7437c10705284f308edc9339f41f8148, type: 3}
   m_Name: Tank Config
   m_EditorClassIdentifier: 
-  ServerProjectilePrefab: {fileID: 6644660686275544078, guid: 67effbc229108fe479cf624231fa7374, type: 3}
-  ClientProjectilePrefab: {fileID: 2672315987442031145, guid: db1d4739d5b025a45a98a580fd349af6, type: 3}
-  Damage: 5
-  ProjectileSpeed: 60
-  FireRate: 1
+  ResourceStats:
+  - Type: 0
+    Value: 100
+    SetToMax: 1
+  - Type: 2
+    Value: 4
+    SetToMax: 1
+  - Type: 5
+    Value: 5
+    SetToMax: 0
+  AttributesStats:
+  - Type: 1
+    Value: 5
+    SetToMax: 1
+  - Type: 3
+    Value: 5
+    SetToMax: 1
+  - Type: 4
+    Value: 180
+    SetToMax: 1
+  - Type: 6
+    Value: 1
+    SetToMax: 1
+  - Type: 7
+    Value: 1
+    SetToMax: 1
+  - Type: 8
+    Value: 4
+    SetToMax: 1
+  - Type: 9
+    Value: 50
+    SetToMax: 1

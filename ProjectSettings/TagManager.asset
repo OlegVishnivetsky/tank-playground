@@ -44,11 +44,11 @@ TagManager:
   - name: Background
     uniqueID: 1445652533
     locked: 0
-  - name: Decor
-    uniqueID: 3295298651
-    locked: 0
   - name: Tank
     uniqueID: 504521655
+    locked: 0
+  - name: Decor
+    uniqueID: 3295298651
     locked: 0
   - name: UI
     uniqueID: 2507759459
